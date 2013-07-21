@@ -16,6 +16,7 @@ if __name__ == "__main__":
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind((host, port))
+        print "Opened socket"
         while 1:
             s.listen(1)
             conn, addr = s.accept()
@@ -37,13 +38,17 @@ if __name__ == "__main__":
                     continue
                 theta = float(data.split(",")[0])
                 r = float(data.split(",")[1])
-                if r < 255 and r != v:
-                    a.write(chr(int(round(r))))
-                    v = r
-                elif r > 255 and v != 255:
-                    a.write(chr(255))
-                    v = 255
-                print v
+                q = r*math.sin(theta) + 100
+                if q > 0 and q < 200:
+                    a.write(chr(int(round(q))))
+                    v = q
+                elif q > 200:
+                    a.write(chr(200))
+                    v = 200
+                elif q < 0:
+                    a.write(chr(0))
+                    v = 0
+                print 83*v/10 + 670
                 conn.send("good")
         
     except (KeyboardInterrupt, SystemExit):
