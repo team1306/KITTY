@@ -1,7 +1,8 @@
 var text = "0,0";
+var disable = false;
 var width = $(window).width();
 var height = $(window).height();
-var ws = new WebSocket("ws://192.168.0.20/data");
+var ws = new WebSocket("ws://192.168.1.248/data");
 
 ws.onopen = function() {
     setInterval(send, 100);
@@ -20,17 +21,22 @@ function send() {
 }
 
 function change(e) {
-    x = e.pageX - $(window).width()/2;
-    y = -1 * (e.pageY - $(window).height()/2);
-    r = Math.sqrt(x*x + y*y);
-    if(Math.abs(r) < 10) {
-	r = 0;
+    if(!disable) {
+	x = e.pageX - $(window).width()/2;
+	y = -1 * (e.pageY - $(window).height()/2);
+	r = Math.sqrt(x*x + y*y);
+	if(Math.abs(r) < 10) {
+	    r = 0;
+	}
+	else {
+	    r = r - 10;
+	}
+	theta = Math.atan2(y, x);
+	text = theta + "," + r;
     }
     else {
-	r = r - 10;
+	text = "0,0"
     }
-    theta = Math.atan2(y, x);
-    text = theta + "," + r;
 }
 
 function down(e) {
@@ -51,6 +57,15 @@ function down(e) {
     case 83:
     case 40:
 	text = -(Math.PI/2)+",50";
+	break;
+    case 81:
+	text = "0,0";
+	if(disable) {
+	    disable = false;
+	}
+	else {
+	    disable = true;
+	}
 	break;
     }
 }
