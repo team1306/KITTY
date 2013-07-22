@@ -1,3 +1,5 @@
+var x = 0;
+var y = 0;
 var drive = false;
 var base = 0; // 1 for right, -1 for left
 var bjoint = 0; // 1 for up, -1 for down
@@ -6,14 +8,14 @@ var claw = 0; // 1 for in, -1 for out
 var disable = false;
 var width = $(window).width();
 var height = $(window).height();
-var ws = new WebSocket("ws://192.168.1.248/data");
+var ws = new WebSocket("ws://192.168.0.20/data");
 
 ws.onopen = function() {
     setInterval(send, 100);
 }
 
 ws.onmessage = function(m) {
-    $(d).text(m.data);
+    //$(d).text(m.data);
 }
 
 ws.onclose = function() {
@@ -21,6 +23,10 @@ ws.onclose = function() {
 }
 
 function send() {
+    theta = Math.atan2(y, x);
+    r = Math.sqrt(x*x + y*y);
+    text = theta.toString() + "," + r.toString() + "," + base.toString() + "," + bjoint.toString() + "," + tjoint.toString() + "," + claw.toString();
+    $("#d").html(text);
     ws.send(text);
 }
 
@@ -41,29 +47,34 @@ function send() {
     else {
 	text = "0,0"
     }
-}
+}*/
 
 function down(e) {
     k = String.fromCharCode(e.which);
     switch(e.keyCode) {
     case 65:
     case 37:
-	text = Math.PI+",50";
+	x = -50;
+	y = 0;
 	break;
     case 87:
     case 38:
-	text = (Math.PI/2)+",50";
+	x = 0;
+	y = 50;
 	break;
     case 68:
     case 39:
-	text = "0,50";
+	x = 50;
+	y = 0;
 	break;
     case 83:
     case 40:
-	text = -(Math.PI/2)+",50";
+	x = 0;
+	y = -50;
 	break;
     case 81:
-	text = "0,0";
+	x = 0;
+	y = 0;
 	if(disable) {
 	    disable = false;
 	}
@@ -77,13 +88,15 @@ function down(e) {
 function up(e) {
     k = String.fromCharCode(e.which);
     if((e.keyCode < 41 && e.keyCode > 36) || e.keyCode == 83 || e.keyCode == 68 || e.keyCode == 87 || e.keyCode == 65) {
-	text = "0,0";
+	x = 0;
+	y = 0;
     }
-}*/
+}
 
 function denable(e) {
     if(!drive) {
 	drive = true;
+	move(e);
     }
 }
 
@@ -111,7 +124,43 @@ function taddown(e) {
     tjoint = -1;
 }
 
-function 
+function codown(e) {
+    claw = -1;
+}
+
+function ccdown(e) {
+    claw = 1;
+}
+
+function ddisable(e) {
+    drive = false;
+    x = 0;
+    y = 0;
+}
+
+function bup(e) {
+    base = 0;
+}
+
+function baup(e) {
+    bjoint = 0;
+}
+
+function taup(e) {
+    tjoint = 0;
+}
+
+function cup(e) {
+    claw = 0;
+}
+
+function move(e) {
+    if(drive) {
+	x = e.pageX - $("#drive").offset().left - 100;
+	y = -(e.pageY - $("#drive").offset().top - 100);
+    }
+}
+
 $(document).ready(function() {
     $("#drive").mousedown(denable);
 
@@ -122,7 +171,7 @@ $(document).ready(function() {
     $("#bad").mousedown(baddown);
 
     $("#tau").mousedown(taudown);
-    $("#tau").mousedown(taddown);
+    $("#tad").mousedown(taddown);
 
     $("#co").mousedown(codown);
     $("#cc").mousedown(ccdown);
@@ -141,7 +190,8 @@ $(document).ready(function() {
     $("#co").mouseup(cup);
     $("#cc").mouseup(cup);
 
-    //$(document).mousemove(change);
-    //$(document).keydown(down);
-    //$(document).keydown(down);
+    $("#drive").mousemove(move);
+
+    $(document).keydown(down);
+    $(document).keyup(up);
 });
