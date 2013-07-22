@@ -1,0 +1,22 @@
+.button{
+	background-color: #dcdcdc;
+	padding:60px;
+	border: 1px solid #666;
+	color:#000;
+	text-decoration:none;
+	font-size:30px;
+}
+.button:active{
+	background-color:#9c9c9c;
+}
+
+
+
+.other{
+	background-color: #ffffff;
+	color:#000;
+	text-decoration:none;
+}
+.arm:active{
+	background-color:#9c9c9c;
+}
