@@ -25,29 +25,10 @@ ws.onclose = function() {
 function send() {
     theta = Math.atan2(y, x);
     r = Math.sqrt(x*x + y*y);
-    text = theta.toString() + "," + r.toString() + "," + base.toString() + "," + bjoint.toString() + "," + tjoint.toString() + "," + claw.toString();
+    text = x.toString() + "," + y.toString() + "," + base.toString() + "," + bjoint.toString() + "," + tjoint.toString() + "," + claw.toString();
     $("#d").html(text);
     ws.send(text);
 }
-
-/*function change(e) {
-    if(!disable) {
-	x = e.pageX - $(window).width()/2;
-	y = -1 * (e.pageY - $(window).height()/2);
-	r = Math.sqrt(x*x + y*y);
-	if(Math.abs(r) < 10) {
-	    r = 0;
-	}
-	else {
-	    r = r - 10;
-	}
-	theta = Math.atan2(y, x);
-	text = theta + "," + r;
-    }
-    else {
-	text = "0,0"
-    }
-}*/
 
 function down(e) {
     k = String.fromCharCode(e.which);
@@ -161,6 +142,16 @@ function move(e) {
     }
 }
 
+function panic(e) {
+    drive = false;
+    x = 0;
+    y = 0;
+    base = 0;
+    bjoint = 0;
+    tjoint = 0;
+    claw = 0;
+}
+
 $(document).ready(function() {
     $("#drive").mousedown(denable);
 
@@ -191,6 +182,9 @@ $(document).ready(function() {
     $("#cc").mouseup(cup);
 
     $("#drive").mousemove(move);
+    $("#drive").mouseleave(ddisable);
+
+    $("#panic").mousedown(panic);
 
     $(document).keydown(down);
     $(document).keyup(up);
