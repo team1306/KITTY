@@ -9,6 +9,7 @@ var disable = false;
 var width = $(window).width();
 var height = $(window).height();
 var ws = new WebSocket("ws://192.168.0.20/data");
+var gamepadsupport = Modernizr.gamepads;
 
 ws.onopen = function() {
     setInterval(send, 100);
@@ -33,26 +34,31 @@ function send() {
 function down(e) {
     k = String.fromCharCode(e.which);
     switch(e.keyCode) {
-    case 65:
+	//Left Arrows
+	case 65:
     case 37:
 	x = -50;
 	y = 0;
 	break;
+	//Up Arrows
     case 87:
     case 38:
 	x = 0;
 	y = 50;
 	break;
+	//Right Arrows
     case 68:
     case 39:
 	x = 50;
 	y = 0;
 	break;
+	//Down Arrows
     case 83:
     case 40:
 	x = 0;
 	y = -50;
 	break;
+	// Q disables
     case 81:
 	x = 0;
 	y = 0;

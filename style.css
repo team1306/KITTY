@@ -11,14 +11,10 @@
 }
 
 
-
 .other{
 	background-color: #ffffff;
 	color:#000;
 	text-decoration:none;
-}
-.arm:active{
-	background-color:#9c9c9c;
 }
 
 .panic{
@@ -26,5 +22,6 @@
     width:328px;
     color:#ffffff;
     background-color:#ff0000;
-    border-radius:15px
+    border-radius:15px;
+	font-size: xx-large;
 }
