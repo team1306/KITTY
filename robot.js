@@ -15,7 +15,7 @@ ws.onopen = function() {
 }
 
 ws.onmessage = function(m) {
-    //$(d).text(m.data);
+    $(d).text(m.data);
 }
 
 ws.onclose = function() {
@@ -25,7 +25,7 @@ ws.onclose = function() {
 function send() {
     theta = Math.atan2(y, x);
     r = Math.sqrt(x*x + y*y);
-    text = x.toString() + "," + y.toString() + "," + base.toString() + "," + bjoint.toString() + "," + tjoint.toString() + "," + claw.toString();
+    text = theta.toString() + "," + r.toString() + "," + base.toString() + "," + bjoint.toString() + "," + tjoint.toString() + "," + claw.toString();
     $("#d").html(text);
     ws.send(text);
 }
