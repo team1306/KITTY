@@ -34,7 +34,7 @@ if __name__ == "__main__":
                     last = time.time()
                     break
                 last = time.time()
-                if data.count(",") > 1 or data.count(",") == 0:
+                if data.count(",") > 5 or data.count(",") == 0:
                     continue
                 theta = float(data.split(",")[0])
                 r = float(data.split(",")[1])
