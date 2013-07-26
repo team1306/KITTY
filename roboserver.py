@@ -3,6 +3,8 @@ import socket
 import threading
 import serial
 import math
+from mecanum import Mecanum
+from robot import Robot
 
 if __name__ == "__main__":
     try:
@@ -23,32 +25,24 @@ if __name__ == "__main__":
             conn.settimeout(1) # set the timeout to one second so that it takes effect on the subsequent listening
             print 'Connected by', addr
             last = time.time()
+            try:
+                data = conn.recv(1024) # recieve module name
+            except (socket.error, socket.timeout):
+                print "\nFailed to recieve module name.\n"
+                continue
+            robot = Robot(10, 10, module=data)
             while 1:
                 try:
                     data = conn.recv(1024) # recieve data
                 except (socket.error, socket.timeout): # if data doesn't come soon enough, shut off all motors and terminate the script
-                    tr = (0, 0)
+                    robot.safeMode()
                     print "\nLost connection with control station.\n"
                     break
                 if time.time() - last > 0.5: # same as the try/except (i don't know if this is necessary)
                     last = time.time()
                     break
                 last = time.time()
-                if data.count(",") > 5 or data.count(",") == 0: # sometimes there are two lines of data waiting in the queue, so for now it just ignores messages that are abnormally long
-                    continue
-                theta = float(data.split(",")[0]) # extract data that governs the motor speed
-                r = float(data.split(",")[1])
-                q = r*math.sin(theta) + 100 
-                if q > 0 and q < 200: # send the motor speed
-                    a.write(chr(int(round(q))))
-                    v = q
-                elif q > 200: # set motor speed to the limits if the input value is outside of the limits
-                    a.write(chr(200))
-                    v = 200
-                elif q < 0:
-                    a.write(chr(0))
-                    v = 0
-                print 83*v/10 + 670
+                robot.update(data)
                 conn.send("good")
         
     except (KeyboardInterrupt, SystemExit): # if Ctl-C is recieved, exit quietly
