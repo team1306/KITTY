@@ -1,7 +1,13 @@
 from . import *
+from subprocess import call
+from os import chdir
+from os.path import join
 
 # as we write more modules, we need only add an elif to handle the setup of the object
-def getInstance(module):
+def getInstance(module, usbPort, chip):
+    chdir(join("./arduino/", module))
+    call(["ino", "build", "-m", chip])
+    call(["ino", "upload", "-m", chip, "-p", usbPort])
     if module == "arm":
         mod = arm.Arm()
     elif module == "shooter":
