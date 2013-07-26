@@ -21,9 +21,9 @@ class Robot:
         args.pop(-1)
         while len(args) > 0: # handles doubles
             data = args[0].split(',')
-            self.theta = data[0] # drive processing is built-in
-            self.r = data[1]
-            self.bytes = self.driveBase.getBytes(self.r*cos(self.theta), self.r*sin(self.theta))
+            self.theta = float(data[0]) # drive processing is built-in
+            self.r = float(data[1])
+            self.bytes = self.driveBase.getBytes(self.r*cos(self.theta), self.r*sin(self.theta), 0)
             if self.module is not None:
                 self.bytes.append([f for f in self.module.getBytes(data)]) # send all the data to the module expecting list of bytes back
             for b in self.bytes:
