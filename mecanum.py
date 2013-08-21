@@ -17,20 +17,20 @@ class Mecanum:
     # 3: back left
     # 4: back right
 
-    def getVelocities(self, vx, vy, omega):
+    def getVelocities(self, vx, vy, omega): # returns ideal velocities of each wheel
         vw1 = vy - vx + omega*(self.a + self.b)
         vw2 = vy + vx - omega*(self.a + self.b)
         vw3 = vy - vx - omega*(self.a + self.b)
         vw4 = vy + vx + omega*(self.a + self.b)
         return (vw1, vw2, vw3, vw4)
 
-    def scaleVelocities(self, velocities):
+    def scaleVelocities(self, velocities): # scales all of the speeds so that none of them exceed the maximum motor speed
         scaled = []
         for v in velocities:
             scaled.append(float(v*255/(2*(self.maxVelocity + self.maxVelocity + self.maxOmega*(self.a + self.b)))) + 127.5)
         return scaled
 
-    def getBytes(self, vx, vy, omega):
+    def getBytes(self, vx, vy, omega): # returns the bytes to control the Arduino
         velocities = self.scaleVelocities(self.getVelocities(vx, vy, omega))
         b = []
         for v in velocities:
