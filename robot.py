@@ -19,7 +19,7 @@ class Robot:
     def update(self, arguments): # this method will take the entire string sent by the webpage (might be a double)
         args = arguments.split(";")
         args.pop(-1)
-        while len(args) > 0: # handles doubles
+        while len(args) > 0: # handles double messages from socket handler
             data = args[0].split(',')
             self.theta = float(data[0]) # drive processing is built-in
             self.r = float(data[1])

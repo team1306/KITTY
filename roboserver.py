@@ -42,7 +42,7 @@ if __name__ == "__main__":
                     last = time.time()
                     break
                 last = time.time()
-                robot.update(data)
+                robot.update(data) # lets the robot update itself
                 conn.send("good")
         
     except (KeyboardInterrupt, SystemExit): # if Ctl-C is recieved, exit quietly
