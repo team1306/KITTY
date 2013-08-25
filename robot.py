@@ -9,10 +9,7 @@ class Robot:
     def __init__(self, a, b, velocityRange=100**3, omegaRange=10**3, usbPort="/dev/ttyUSB0", baud=9600, modulePath="./modules", module=None, chip="mega2560", test=False):
         self.driveBase = Mecanum(a, b, velocityRange, omegaRange)
         self.modules = getModules()
-        if module is not None and module in self.modules:
-            self.module = getInstance(module, usbPort, chip) # self.module is now the object that we need to use
-        else: 
-            self.module = None
+        self.module = getInstance(module, usbPort, chip) # self.module is now the object that we need to use (None if the module doesn't exist)
         if not test: # so that this doesn't throw an error when I'm developing
             self.arduino = Serial(usbPort, baud)
         

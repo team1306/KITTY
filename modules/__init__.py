@@ -22,6 +22,8 @@ def getInstance(module, usbPort, chip):
         mod = arm.Arm()
     elif module == "shooter":
         mod = shooter.Shooter()
+    else:
+        mod = None
     return mod
 
 # this list also needs to be updated as we add more modules so that robot.py doesn't have to look for the modules
