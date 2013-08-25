@@ -7,11 +7,21 @@ from math import sin, cos
 
 class Robot:
     def __init__(self, a, b, velocityRange=100**3, omegaRange=10**3, usbPort="/dev/ttyUSB0", baud=9600, modulePath="./modules", module=None, chip="mega2560", test=False):
+        print "Loading mecanum drive base"
         self.driveBase = Mecanum(a, b, velocityRange, omegaRange)
+        print "Loaded drive base"
+        print "Loading module"
         self.modules = getModules()
         self.module = getInstance(module, usbPort, chip) # self.module is now the object that we need to use (None if the module doesn't exist)
+        print "Loaded module"
         if not test: # so that this doesn't throw an error when I'm developing
+            print "Connecting to Arduino"
             self.arduino = Serial(usbPort, baud)
+            print "Listening for yodel"
+            while self.arduino.inWaiting() == 0:
+                pass
+            print "Heard yodel"
+            print "Successfully connected to Arduino"
         
     def update(self, arguments): # this method will take the entire string sent by the webpage (might be a double)
         args = arguments.split(";")
