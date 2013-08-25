@@ -2,6 +2,7 @@ bool onoff = 0;
 
 void setup() {
   Serial.begin(9600);
+  Serial.print("yodel");
 }
 
 void loop() {
