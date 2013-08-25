@@ -9,7 +9,7 @@ var disable = false;
 var width = $(window).width();
 var height = $(window).height();
 var ws = new WebSocket("ws://10.42.0.35/data");
-var gamepadsupport = Modernizr.gamepads;
+//var gamepadsupport = Modernizr.gamepads;
 
 ws.onopen = function() {
     setInterval(send, 100);
