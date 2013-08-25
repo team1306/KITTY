@@ -38,9 +38,9 @@ if __name__ == "__main__":
                     print "\nLost connection with control station.\n"
                     break
                 print "Recieved"
-                if time.time() - last > 0.5: # same as the try/except (i don't know if this is necessary)
-                    last = time.time()
-                    break
+                #if time.time() - last > 0.5: # same as the try/except (i don't know if this is necessary)
+                    #last = time.time()
+                    #break
                 last = time.time()
                 print data
                 robot.update(data) # lets the robot update itself
