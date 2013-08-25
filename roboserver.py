@@ -38,6 +38,7 @@ if __name__ == "__main__":
                     last = time.time()
                     break
                 last = time.time()
+                print data
                 robot.update(data) # lets the robot update itself
                 conn.send("good")
         
