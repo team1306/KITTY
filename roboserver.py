@@ -33,9 +33,12 @@ if __name__ == "__main__":
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             s.bind((host, port)) # open socket on port 50007 to listen for data_wsh.py's messages
+            print "Opened new socket"
             s.listen(1)
             conn, addr = s.accept()
+            print "Recieved new connection"
             conn.settimeout(1) # set the timeout to one second so that it takes effect on the subsequent listening
+            print "Set timeout"
             while 1:
                 print "Listening..."
                 try:
