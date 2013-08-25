@@ -19,7 +19,6 @@ if __name__ == "__main__":
         while 1:
             s.listen(1) # wait for connection
             conn, addr = s.accept() # accept connection
-            conn.settimeout(1) # set the timeout to one second so that it takes effect on the subsequent listening
             print 'Connected by', addr
             last = time.time()
             try:
@@ -30,9 +29,10 @@ if __name__ == "__main__":
             print "Initializing Robot"
             robot = Robot(10, 10, module=data, chip="atmega328")
             print "Successfully initialized Robot"
-            input = [s]
-            inputready, o, e = select.select(input,[],[], 0.0)
-            for b in inputready: b.recv(1)
+            s.close()
+            s.listen(1)
+            conn, addr = s.accept()
+            conn.settimeout(1) # set the timeout to one second so that it takes effect on the subsequent listening
             while 1:
                 try:
                     data = conn.recv(1024) # recieve data

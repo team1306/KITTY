@@ -22,6 +22,7 @@ ws.onmessage = function(m) {
 
 ws.onclose = function() {
     $("#d").html("An internal server error has occured.<br/>Please power cycle the robot and reload the page.");
+    var ws = new WebSocket("ws://10.42.0.35/data");
 }
 
 function send() {
