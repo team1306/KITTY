@@ -13,7 +13,7 @@ var ws = new WebSocket("ws://10.42.0.35/data");
 
 ws.onopen = function() {
     setInterval(send, 100);
-    ws.send("base");
+    ws.send("mod:base");
 }
 
 ws.onmessage = function(m) {

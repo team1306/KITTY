@@ -17,3 +17,5 @@ def web_socket_transfer_data(request):
         request.ws_stream.send_message(line)
 
         s.send(line)
+        if line[:4] == "mod:":
+            return
