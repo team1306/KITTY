@@ -3,6 +3,7 @@ import socket
 import threading
 import serial
 import math
+import select
 from mecanum import Mecanum
 from robot import Robot
 
@@ -29,6 +30,8 @@ if __name__ == "__main__":
             print "Initializing Robot"
             robot = Robot(10, 10, module=data, chip="atmega328")
             print "Successfully initialized Robot"
+            inputready, o, e = select.select(input,[],[], 0.0)
+            for s in inputready: s.recv(1)
             while 1:
                 try:
                     data = conn.recv(1024) # recieve data
