@@ -8,8 +8,10 @@ from robot import Robot
 
 if __name__ == "__main__":
     try:
+        print "Connecting to Arduino"
         a = serial.Serial("/dev/ttyUSB0", 115200)
         v = 0
+        print "Waiting for yodel"
         while a.inWaiting() == 0: # wait for Arduino to send "yodel" so that we know it's ready to start listening
             pass
         print "Initialized Arduino"
