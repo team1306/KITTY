@@ -30,8 +30,9 @@ if __name__ == "__main__":
             print "Initializing Robot"
             robot = Robot(10, 10, module=data, chip="atmega328")
             print "Successfully initialized Robot"
+            input = [s]
             inputready, o, e = select.select(input,[],[], 0.0)
-            for s in inputready: s.recv(1)
+            for b in inputready: b.recv(1)
             while 1:
                 try:
                     data = conn.recv(1024) # recieve data
