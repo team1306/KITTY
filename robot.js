@@ -8,7 +8,7 @@ var claw = 0; // 1 for in, -1 for out
 var disable = false;
 var width = $(window).width();
 var height = $(window).height();
-var ws = new WebSocket("ws://10.42.0.1/data");
+var ws = new WebSocket("ws://10.42.0.35/data");
 var gamepadsupport = Modernizr.gamepads;
 
 ws.onopen = function() {
