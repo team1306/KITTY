@@ -28,7 +28,7 @@ ws.onclose = function() {
 function send() {
     theta = Math.atan2(y, x);
     r = Math.sqrt(x*x + y*y);
-    text = theta.toString() + "," + r.toString() + "," + base.toString() + "," + bjoint.toString() + "," + tjoint.toString() + "," + claw.toString();
+    text = theta.toString() + "," + r.toString() + "," + base.toString() + "," + bjoint.toString() + "," + tjoint.toString() + "," + claw.toString()+";";
     ws.send(text);
 }
 
