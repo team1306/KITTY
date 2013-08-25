@@ -30,7 +30,7 @@ if __name__ == "__main__":
             except (socket.error, socket.timeout):
                 print "\nFailed to recieve module name.\n"
                 continue
-            robot = Robot(10, 10, module=data)
+            robot = Robot(10, 10, module=data, chip="atmega328")
             while 1:
                 try:
                     data = conn.recv(1024) # recieve data
