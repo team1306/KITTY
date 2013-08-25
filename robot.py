@@ -22,7 +22,7 @@ class Robot:
             self.r = float(data[1])
             self.bytes = self.driveBase.getBytes(self.r*cos(self.theta), self.r*sin(self.theta), 0)
             if self.module is not None:
-                self.bytes.append([f for f in self.module.getBytes(data)]) # send all the data to the module expecting list of bytes back
+                self.bytes.append(f for f in self.module.getBytes(data)) # send all the data to the module expecting list of bytes back
             for b in self.bytes:
                 self.arduino.write(b)
                 while not self.arduino.inWaiting():
