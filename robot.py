@@ -26,8 +26,6 @@ class Robot:
     def update(self, arguments): # this method will take the entire string sent by the webpage (might be a double)
         args = arguments.split(";")
         args.pop(-1)
-        print args
-        print len(args)
         while len(args) > 0: # handles double messages from socket handler
             data = args.pop().split(',')
             print data
@@ -37,6 +35,7 @@ class Robot:
             self.bytes = self.driveBase.getBytes(self.r*cos(self.theta), self.r*sin(self.theta), 0)
             if self.module is not None:
                 self.bytes.append(f for f in self.module.getBytes(data)) # send all the data to the module expecting list of bytes back
+            print self.bytes
             for b in self.bytes:
                 self.arduino.write(b)
                 while not self.arduino.inWaiting():
