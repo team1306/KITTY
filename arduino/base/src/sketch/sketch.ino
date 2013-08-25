@@ -2,10 +2,10 @@ bool onoff = 0;
 
 void setup() {
   Serial.begin(9600);
-  Serial.print("yodel");
 }
 
 void loop() {
+  Serial.print("y");
   if(Serial.available() > 3) {
     int a = int(Serial.read());
     int b = int(Serial.read());
