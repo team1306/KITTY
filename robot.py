@@ -29,7 +29,9 @@ class Robot:
         print args
         print len(args)
         while len(args) > 0: # handles double messages from socket handler
-            data = args[0].split(',')
+            data = args.pop().split(',')
+            print data
+            print len(data)
             self.theta = float(data[0]) # drive processing is built-in
             self.r = float(data[1])
             self.bytes = self.driveBase.getBytes(self.r*cos(self.theta), self.r*sin(self.theta), 0)
