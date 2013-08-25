@@ -8,8 +8,8 @@ def flashArduino(module, usbPort, chip):
         chdir(join("./arduino/", module)) # current working directory is KITTY
     else:
         chdir("./arduino/base")
-    call(["ino", "build", "-m", chip]) # build arduino module in case it's changed
-    call(["ino", "upload", "-m", chip, "-p", usbPort]) # flash module onto arduino
+    #call(["ino", "build", "-m", chip]) # build arduino module in case it's changed
+    #call(["ino", "upload", "-m", chip, "-p", usbPort]) # flash module onto arduino
     # might want to make that last line only execute if the requested module is different from the last one so as to not flash every time
 
 

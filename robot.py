@@ -17,11 +17,11 @@ class Robot:
         if not test: # so that this doesn't throw an error when I'm developing
             print "Connecting to Arduino"
             self.arduino = Serial(usbPort, baud)
+            print "Successfully connected to Arduino"
             print "Listening for yodel"
             while self.arduino.inWaiting() == 0:
                 pass
             print "Heard yodel"
-            print "Successfully connected to Arduino"
         
     def update(self, arguments): # this method will take the entire string sent by the webpage (might be a double)
         args = arguments.split(";")
