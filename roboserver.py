@@ -30,19 +30,16 @@ if __name__ == "__main__":
             robot = Robot(10, 10, module=data.lstrip("mod:"), chip="atmega328")
             print "Successfully initialized Robot"
             while 1:
-                print "Listening..."
                 try:
                     data = conn.recv(1024) # recieve data
                 except (socket.error, socket.timeout): # if data doesn't come soon enough, shut off all motors and terminate the script
                     robot.safeMode()
                     print "\nLost connection with control station.\n"
                     break
-                print "Recieved"
                 #if time.time() - last > 0.5: # same as the try/except (i don't know if this is necessary)
                     #last = time.time()
                     #break
                 last = time.time()
-                print data
                 robot.update(data) # lets the robot update itself
                 conn.send("good")
         
