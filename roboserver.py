@@ -27,7 +27,7 @@ if __name__ == "__main__":
                 print "\nFailed to recieve module name.\n"
                 continue
             print "Initializing Robot"
-            robot = Robot(10, 10, module=data.lstrip("mod:"), chip="atmega328")
+            robot = Robot(10, 10, module=data.lstrip("mod:"))
             print "Successfully initialized Robot"
             data = conn.recv(1024)
             while 1:

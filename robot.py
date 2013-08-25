@@ -6,7 +6,7 @@ from modules import *
 from math import sin, cos
 
 class Robot:
-    def __init__(self, a, b, velocityRange=100, omegaRange=0, usbPort="/dev/ttyUSB0", baud=9600, modulePath="./modules", module=None, chip="mega2560", test=False):
+    def __init__(self, a, b, velocityRange=100, omegaRange=0, usbPort="/dev/ttyACM0", baud=9600, modulePath="./modules", module=None, chip="mega2560", test=False):
         print "Loading mecanum drive base"
         self.driveBase = Mecanum(a, b, velocityRange, omegaRange)
         print "Loaded drive base"
