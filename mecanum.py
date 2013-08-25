@@ -1,7 +1,7 @@
 from math import sin, cos
 
 class Mecanum:
-    def __init__(self, a, b, velocityRange=50, omegaRange=0): 
+    def __init__(self, a, b, velocityRange=100, omegaRange=0): 
         # the ranges are centered at 0, so the actual range of acceptable velocity values is [-velocityRange, velocityRange]
         # the range is also the range for v_x and v_y, not |v|
         self.a = a
