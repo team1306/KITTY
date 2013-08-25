@@ -27,7 +27,7 @@ class Mecanum:
     def scaleVelocities(self, velocities): # scales all of the speeds so that none of them exceed the maximum motor speed
         scaled = []
         for v in velocities:
-            scaled.append(float(v*255/(2*(self.maxVelocity + self.maxVelocity + self.maxOmega*(self.a + self.b)))) + 127.5)
+            scaled.append(float(v*255/(2*(self.maxVelocity + self.maxVelocity + self.maxOmega*(self.a + self.b))+1)) + 127)
         return scaled
 
     def getBytes(self, vx, vy, omega): # returns the bytes to control the Arduino
