@@ -11,7 +11,7 @@ void loop() {
     int b = int(Serial.read());
     int c = int(Serial.read());
     int d = int(Serial.read());
-    if(a > 0) {
+    if(a > 127) {
       onoff = 0;
     }
     else {
