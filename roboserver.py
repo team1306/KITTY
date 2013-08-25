@@ -12,10 +12,10 @@ if __name__ == "__main__":
         v = 0
         host = ''
         port = 50007
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        s.bind((host, port)) # open socket on port 50007 to listen for data_wsh.py's messages
         while 1:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            s.bind((host, port)) # open socket on port 50007 to listen for data_wsh.py's messages
             print "Opened socket"
             s.listen(1) # wait for connection
             conn, addr = s.accept() # accept connection
@@ -29,16 +29,6 @@ if __name__ == "__main__":
             print "Initializing Robot"
             robot = Robot(10, 10, module=data.lstrip("mod:"), chip="atmega328")
             print "Successfully initialized Robot"
-            s.close()
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            s.bind((host, port)) # open socket on port 50007 to listen for data_wsh.py's messages
-            print "Opened new socket"
-            s.listen(1)
-            conn, addr = s.accept()
-            print "Recieved new connection"
-            conn.settimeout(1) # set the timeout to one second so that it takes effect on the subsequent listening
-            print "Set timeout"
             while 1:
                 print "Listening..."
                 try:
