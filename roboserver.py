@@ -37,12 +37,14 @@ if __name__ == "__main__":
             conn, addr = s.accept()
             conn.settimeout(1) # set the timeout to one second so that it takes effect on the subsequent listening
             while 1:
+                print "Listening..."
                 try:
                     data = conn.recv(1024) # recieve data
                 except (socket.error, socket.timeout): # if data doesn't come soon enough, shut off all motors and terminate the script
                     robot.safeMode()
                     print "\nLost connection with control station.\n"
                     break
+                print "Recieved"
                 if time.time() - last > 0.5: # same as the try/except (i don't know if this is necessary)
                     last = time.time()
                     break
