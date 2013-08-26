@@ -43,7 +43,9 @@ if __name__ == "__main__":
                 print data
                 last = time.time()
                 robot.update(data) # lets the robot update itself
+                print "here 1"
                 conn.send("good")
+                print "here 2"
         
     except (KeyboardInterrupt, SystemExit): # if Ctl-C is recieved, exit quietly
         print "\nRecieved keyboard interrupt, quitting server\n"
