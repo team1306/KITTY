@@ -13,16 +13,13 @@ void loop() {
     int b = int(Serial.read());
     int c = int(Serial.read());
     int d = int(Serial.read());
-    Serial.println(a);
-    Serial.println(b);
-    Serial.println(c);
-    Serial.println(d);
     if(a >= 127) {
       onoff = 0;
     }
     else {
       onoff = 1;
     }
+    Serial.println("yodel");
   }
   digitalWrite(11, onoff);
 }

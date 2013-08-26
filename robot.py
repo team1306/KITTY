@@ -37,6 +37,4 @@ class Robot:
             print self.bytes
             for b in self.bytes:
                 self.arduino.write(b)
-                while not self.arduino.inWaiting():
-                    pass
-                
+                dummy = self.arduino.readline()
