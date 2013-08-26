@@ -35,5 +35,6 @@ class Robot:
             if self.module is not None:
                 self.bytes.append(f for f in self.module.getBytes(data)) # send all the data to the module expecting list of bytes back
             print self.bytes
-            self.arduino.write(self.bytes)
+            for b in self.bytes:
+                self.arduino.write(b)
             dummy = self.arduino.readline()
