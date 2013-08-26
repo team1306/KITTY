@@ -38,3 +38,4 @@ class Robot:
             for b in self.bytes:
                 self.arduino.write(b)
             dummy = self.arduino.readline()
+            print dummy

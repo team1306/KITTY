@@ -1,10 +1,14 @@
-bool onoff = 0;
+#include <Servo.h>
+
+Servo s;
+int pos = 0;
 
 void setup() {
   Serial.begin(9600);
   delay(500);
   Serial.println("yodel");
   pinMode(11, OUTPUT);
+  s.attach(9);
 }
 
 void loop() {
@@ -13,13 +17,8 @@ void loop() {
     int b = int(Serial.read());
     int c = int(Serial.read());
     int d = int(Serial.read());
-    if(a >= 127) {
-      onoff = 0;
-    }
-    else {
-      onoff = 1;
-    }
+    pos = int(180*a/255);
     Serial.println("yodel");
   }
-  digitalWrite(11, onoff);
+  s.write(pos);
 }

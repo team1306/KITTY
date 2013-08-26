@@ -40,6 +40,7 @@ if __name__ == "__main__":
                 #if time.time() - last > 0.5: # same as the try/except (i don't know if this is necessary)
                     #last = time.time()
                     #break
+                print data
                 last = time.time()
                 robot.update(data) # lets the robot update itself
                 conn.send("good")
