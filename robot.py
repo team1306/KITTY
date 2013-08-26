@@ -19,8 +19,7 @@ class Robot:
             self.arduino = Serial(usbPort, baud)
             print "Successfully connected to Arduino"
             print "Listening for yodel"
-            while self.arduino.inWaiting() == 0:
-                pass
+            dummy = self.arduino.readline() # readline waits for a full line to arrive before moving on
             print "Heard yodel"
         
     def update(self, arguments): # this method will take the entire string sent by the webpage (might be a double)
