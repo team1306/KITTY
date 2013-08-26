@@ -30,6 +30,7 @@ if __name__ == "__main__":
             robot = Robot(10, 10, module=data.lstrip("mod:"))
             print "Successfully initialized Robot"
             data = conn.recv(1024)
+            conn.settimeout(1)
             while 1:
                 try:
                     data = conn.recv(1024) # recieve data
