@@ -1,14 +1,13 @@
 #include <Servo.h>
 
 Servo s;
-int pos = 0;
+int pos = 20;
 
 void setup() {
   Serial.begin(9600);
   delay(500);
   Serial.println("yodel");
-  pinMode(11, OUTPUT);
-  s.attach(9);
+  pinMode(13, OUTPUT);
 }
 
 void loop() {
@@ -17,8 +16,13 @@ void loop() {
     int b = int(Serial.read());
     int c = int(Serial.read());
     int d = int(Serial.read());
-    pos = int(180*a/255);
+    pos = a;
     Serial.println("yodel");
   }
-  s.write(pos);
+  if(pos > 127) {
+    digitalWrite(13, HIGH);
+  }
+  else {
+    digitalWrite(13, LOW);
+  }
 }
